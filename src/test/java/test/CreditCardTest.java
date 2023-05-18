@@ -115,21 +115,21 @@ public class CreditCardTest {
     @DisplayName("Должен отобразить ошибку при невалидном месяце")
     void shouldGetFormatErrorMessageWithInvalidMonth() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithInvalidMonth());
-        creditPage.findMonthFormatErrorMessage();
+        creditPage.findErrorMessageMonthLessCurrentMonthIfCurrentYear();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном годе (год меньше текущего)")
     void shouldGetFormatErrorMessageWithInvalidYearLessCurrentYear() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithInvalidYearLessCurrentYear());
-        creditPage.findYearFormatErrorMessage();
+        creditPage.findYearErrorMessageLessCurrentYear();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном годе (год больше максимального)")
     void shouldGetFormatErrorMessageWithInvalidYearMoreMaxYear() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithInvalidYearMoreMaxYear());
-        creditPage.findYearFormatErrorMessage();
+        creditPage.findYearErrorMessageMoreCurrentYear();
     }
 
     @Test

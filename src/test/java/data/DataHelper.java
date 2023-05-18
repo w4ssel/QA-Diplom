@@ -57,8 +57,9 @@ public class DataHelper {
         return random.nextInt(maxYear - getCurrentYear() + 1) + getCurrentYear();
     }
 
-    public static int getRandomInvalidYearLessCurrentYear() {
-        return random.nextInt(getCurrentYear() + 1);
+    public static String getRandomInvalidYearLessCurrentYear() {
+        int randomYear = random.nextInt(getCurrentYear() - 1) + 1;
+        return String.format("%02d", randomYear);
     }
 
     public static int getRandomInvalidYearMoreMaxYear() {
@@ -140,7 +141,7 @@ public class DataHelper {
     }
 
     public static CardInfo getCardInfoWithInvalidYearLessCurrentYear() {
-        return new CardInfo(getApprovedCardNumber(), getRandomValidMonthIfCurrentYear(), getRandomInvalidYearLessCurrentYear(), getRandomValidHolder(), getRandomValidCode());
+        return new CardInfo(getApprovedCardNumber(), getRandomValidMonthIfCurrentYear(), Integer.parseInt(getRandomInvalidYearLessCurrentYear()), getRandomValidHolder(), getRandomValidCode());
     }
 
     public static CardInfo getCardInfoWithInvalidYearMoreMaxYear() {

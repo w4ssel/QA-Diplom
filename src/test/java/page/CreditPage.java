@@ -61,16 +61,20 @@ public class CreditPage {
         errorCardNumber.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
     }
 
-    public void findMonthFormatErrorMessage() {
-        errorMonth.shouldBe(visible).shouldHave(text("Неверно указан срок действия карты"));
+    public void findErrorMessageMonthLessCurrentMonthIfCurrentYear() {
+        errorMonth.shouldBe(visible).shouldHave(text("Истёк срок действия карты"));
     }
 
     public void findRequiredMonthErrorMessage() {
         errorMonth.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
     }
 
-    public void findYearFormatErrorMessage() {
+    public void findYearErrorMessageMoreCurrentYear() {
         errorYear.shouldBe(visible).shouldHave(text("Неверно указан срок действия карты"));
+    }
+
+    public void findYearErrorMessageLessCurrentYear() {
+        errorYear.shouldBe(visible).shouldHave(text("Истёк срок действия карты"));
     }
 
     public void findRequiredYearErrorMessage() {

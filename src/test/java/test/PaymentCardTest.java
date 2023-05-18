@@ -114,21 +114,21 @@ public class PaymentCardTest {
     @DisplayName("Должен отобразить ошибку при невалидном месяце")
     void shouldGetFormatErrorMessageWithInvalidMonth() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithInvalidMonth());
-        paymentPage.findMonthFormatErrorMessage();
+        paymentPage.findErrorMessageMonthLessCurrentMonthIfCurrentYear();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном годе (год меньше текущего)")
     void shouldGetFormatErrorMessageWithInvalidYearLessCurrentYear() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithInvalidYearLessCurrentYear());
-        paymentPage.findYearFormatErrorMessage();
+        paymentPage.findYearErrorMessageLessCurrentYear();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном годе (год больше максимального)")
     void shouldGetFormatErrorMessageWithInvalidYearMoreMaxYear() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithInvalidYearMoreMaxYear());
-        paymentPage.findYearFormatErrorMessage();
+        paymentPage.findYearErrorMessageMoreCurrentYear();
     }
 
     @Test
@@ -151,5 +151,7 @@ public class PaymentCardTest {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithInvalidCode());
         paymentPage.findCodeFormatErrorMessage();
     }
+
+
 
 }
