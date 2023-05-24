@@ -39,7 +39,7 @@ public class CreditCardTest {
     @DisplayName("Должен успешно выполнить платеж с одобренной карты")
     void shouldMakePaymentWithApprovedCard() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithApprovedCardNumber());
-        creditPage.findSuccessMessage();
+        creditPage.checkSuccessMessage();
         assertEquals("APPROVED", SQLHelper.getCreditCardStatus());
     }
 
@@ -47,7 +47,7 @@ public class CreditCardTest {
     @DisplayName("Должен отказать в совершении платежа с отклоненной карты")
     void shouldRejectPaymentWithDeclinedCard() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithDeclinedCardNumber());
-        creditPage.findErrorMessage();
+        creditPage.checkErrorMessage();
         assertEquals("DECLINED", SQLHelper.getCreditCardStatus());
     }
 
@@ -55,102 +55,102 @@ public class CreditCardTest {
     @DisplayName("Должен отобразить ошибку при незаполненных полях")
     void shouldGetRequireErrorMessageWithBlankFields() {
         creditPage.clickContinueButton();
-        creditPage.findRequiredCardNumberErrorMessage();
-        creditPage.findRequiredMonthErrorMessage();
-        creditPage.findRequiredYearErrorMessage();
-        creditPage.findRequiredHolderErrorMessage();
-        creditPage.findRequiredCodeErrorMessage();
+        creditPage.checkRequiredCardNumberErrorMessage();
+        creditPage.checkRequiredMonthErrorMessage();
+        creditPage.checkRequiredYearErrorMessage();
+        creditPage.checkRequiredHolderErrorMessage();
+        creditPage.checkRequiredCodeErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при незаполненном номере карты")
     void shouldGetRequireErrorMessageWithEmptyCardNumber() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithoutCardNumber());
-        creditPage.findRequiredCardNumberErrorMessage();
+        creditPage.checkRequiredCardNumberErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при незаполненном месяце")
     void shouldGetRequireErrorMessageWithEmptyMonth() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithoutMonth());
-        creditPage.findRequiredMonthErrorMessage();
+        creditPage.checkRequiredMonthErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при незаполненном годе")
     void shouldGetRequireErrorMessageWithEmptyYear() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithoutYear());
-        creditPage.findRequiredYearErrorMessage();
+        creditPage.checkRequiredYearErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при незаполненном владельце")
     void shouldGetRequireErrorMessageWithEmptyHolder() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithoutHolder());
-        creditPage.findRequiredHolderErrorMessage();
+        creditPage.checkRequiredHolderErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при незаполненном коде")
     void shouldGetRequireErrorMessageWithEmptyCode() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithoutCode());
-        creditPage.findRequiredCodeErrorMessage();
+        creditPage.checkRequiredCodeErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отклонить платеж с непредусмотренной карты")
     void shouldRejectPaymentWithUnintendedCardNumber() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithUnintendedCardNumber());
-        creditPage.findErrorMessage();
+        creditPage.checkErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном номере карты")
     void shouldGetFormatErrorMessageWithInvalidCardNumber() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithInvalidCardNumber());
-        creditPage.findCardNumberFormatErrorMessage();
+        creditPage.checkCardNumberFormatErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном месяце")
     void shouldGetFormatErrorMessageWithInvalidMonth() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithInvalidMonth());
-        creditPage.findErrorMessageMonthLessCurrentMonthIfCurrentYear();
+        creditPage.checkErrorMessageMonthLessCurrentMonthIfCurrentYear();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном годе (год меньше текущего)")
     void shouldGetFormatErrorMessageWithInvalidYearLessCurrentYear() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithInvalidYearLessCurrentYear());
-        creditPage.findYearErrorMessageLessCurrentYear();
+        creditPage.checkYearErrorMessageLessCurrentYear();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном годе (год больше максимального)")
     void shouldGetFormatErrorMessageWithInvalidYearMoreMaxYear() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithInvalidYearMoreMaxYear());
-        creditPage.findYearErrorMessageMoreCurrentYear();
+        creditPage.checkYearErrorMessageMoreCurrentYear();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном владельце (менее 3-ех букв)")
     void shouldGetFormatErrorMessageWithInvalidHolder() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithInvalidHolder());
-        creditPage.findHolderFormatErrorMessage();
+        creditPage.checkHolderFormatErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном владельце (кириллица)")
     void shouldGetFormatErrorMessageWithInvalidHolderRu() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithInvalidHolderRu());
-        creditPage.findHolderFormatErrorMessage();
+        creditPage.checkHolderFormatErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном коде")
     void shouldGetFormatErrorMessageWithInvalidCode() {
         creditPage.sendCardInfo(DataHelper.getCardInfoWithInvalidCode());
-        creditPage.findCodeFormatErrorMessage();
+        creditPage.checkCodeFormatErrorMessage();
     }
 
 }

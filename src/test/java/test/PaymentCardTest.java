@@ -38,7 +38,7 @@ public class PaymentCardTest {
     @DisplayName("Должен успешно выполнить платеж с одобренной карты")
     void shouldMakePaymentWithApprovedCard() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithApprovedCardNumber());
-        paymentPage.findSuccessMessage();
+        paymentPage.checkSuccessMessage();
         assertEquals("APPROVED", SQLHelper.getPaymentCardStatus());
     }
 
@@ -46,7 +46,7 @@ public class PaymentCardTest {
     @DisplayName("Должен отказать в совершении платежа с отклоненной карты")
     void shouldRejectPaymentWithDeclinedCard() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithDeclinedCardNumber());
-        paymentPage.findErrorMessage();
+        paymentPage.checkErrorMessage();
         assertEquals("DECLINED", SQLHelper.getPaymentCardStatus());
     }
 
@@ -54,102 +54,102 @@ public class PaymentCardTest {
     @DisplayName("Должен отобразить ошибку при незаполненных полях")
     void shouldGetRequireErrorMessageWithBlankFields() {
         paymentPage.clickContinueButton();
-        paymentPage.findRequiredCardNumberErrorMessage();
-        paymentPage.findRequiredMonthErrorMessage();
-        paymentPage.findRequiredYearErrorMessage();
-        paymentPage.findRequiredHolderErrorMessage();
-        paymentPage.findRequiredCodeErrorMessage();
+        paymentPage.checkRequiredCardNumberErrorMessage();
+        paymentPage.checkRequiredMonthErrorMessage();
+        paymentPage.checkRequiredYearErrorMessage();
+        paymentPage.checkRequiredHolderErrorMessage();
+        paymentPage.checkRequiredCodeErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при незаполненном номере карты")
     void shouldGetRequireErrorMessageWithEmptyCardNumber() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithoutCardNumber());
-        paymentPage.findRequiredCardNumberErrorMessage();
+        paymentPage.checkRequiredCardNumberErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при незаполненном месяце")
     void shouldGetRequireErrorMessageWithEmptyMonth() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithoutMonth());
-        paymentPage.findRequiredMonthErrorMessage();
+        paymentPage.checkRequiredMonthErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при незаполненном годе")
     void shouldGetRequireErrorMessageWithEmptyYear() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithoutYear());
-        paymentPage.findRequiredYearErrorMessage();
+        paymentPage.checkRequiredYearErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при незаполненном владельце")
     void shouldGetRequireErrorMessageWithEmptyHolder() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithoutHolder());
-        paymentPage.findRequiredHolderErrorMessage();
+        paymentPage.checkRequiredHolderErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при незаполненном коде")
     void shouldGetRequireErrorMessageWithEmptyCode() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithoutCode());
-        paymentPage.findRequiredCodeErrorMessage();
+        paymentPage.checkRequiredCodeErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отклонить платеж с непредусмотренной карты")
     void shouldRejectPaymentWithUnintendedCardNumber() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithUnintendedCardNumber());
-        paymentPage.findErrorMessage();
+        paymentPage.checkErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном номере карты")
     void shouldGetFormatErrorMessageWithInvalidCardNumber() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithInvalidCardNumber());
-        paymentPage.findCardNumberFormatErrorMessage();
+        paymentPage.checkCardNumberFormatErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном месяце")
     void shouldGetFormatErrorMessageWithInvalidMonth() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithInvalidMonth());
-        paymentPage.findErrorMessageMonthLessCurrentMonthIfCurrentYear();
+        paymentPage.checkErrorMessageMonthLessCurrentMonthIfCurrentYear();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном годе (год меньше текущего)")
     void shouldGetFormatErrorMessageWithInvalidYearLessCurrentYear() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithInvalidYearLessCurrentYear());
-        paymentPage.findYearErrorMessageLessCurrentYear();
+        paymentPage.checkYearErrorMessageLessCurrentYear();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном годе (год больше максимального)")
     void shouldGetFormatErrorMessageWithInvalidYearMoreMaxYear() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithInvalidYearMoreMaxYear());
-        paymentPage.findYearErrorMessageMoreCurrentYear();
+        paymentPage.checkYearErrorMessageMoreCurrentYear();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном владельце (менее 3-ех букв)")
     void shouldGetFormatErrorMessageWithInvalidHolder() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithInvalidHolder());
-        paymentPage.findHolderFormatErrorMessage();
+        paymentPage.checkHolderFormatErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном владельце (кириллица)")
     void shouldGetFormatErrorMessageWithInvalidHolderRu() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithInvalidHolderRu());
-        paymentPage.findHolderFormatErrorMessage();
+        paymentPage.checkHolderFormatErrorMessage();
     }
 
     @Test
     @DisplayName("Должен отобразить ошибку при невалидном коде")
     void shouldGetFormatErrorMessageWithInvalidCode() {
         paymentPage.sendCardInfo(DataHelper.getCardInfoWithInvalidCode());
-        paymentPage.findCodeFormatErrorMessage();
+        paymentPage.checkCodeFormatErrorMessage();
     }
 
 

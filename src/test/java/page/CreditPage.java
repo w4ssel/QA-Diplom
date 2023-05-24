@@ -35,7 +35,7 @@ public class CreditPage {
     public void sendCardInfo(DataHelper.CardInfo cardInfo) {
         cardNumber.setValue(cardInfo.getCardNumber());
         month.setValue(String.format("%02d", cardInfo.getMonth()));
-        year.setValue(String.valueOf(cardInfo.getYear()));
+        year.setValue(String.format("%02d", cardInfo.getYear()));
         holder.setValue(cardInfo.getHolder());
         code.setValue(cardInfo.getCode());
         continueButton.click();
@@ -45,55 +45,55 @@ public class CreditPage {
         continueButton.click();
     }
 
-    public void findSuccessMessage() {
+    public void checkSuccessMessage() {
         successMessage.shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    public void findErrorMessage() {
+    public void checkErrorMessage() {
         errorMessage.shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    public void findCardNumberFormatErrorMessage() {
+    public void checkCardNumberFormatErrorMessage() {
         errorCardNumber.shouldBe(visible).shouldHave(text("Неверный формат"));
     }
 
-    public void findRequiredCardNumberErrorMessage() {
+    public void checkRequiredCardNumberErrorMessage() {
         errorCardNumber.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
     }
 
-    public void findErrorMessageMonthLessCurrentMonthIfCurrentYear() {
+    public void checkErrorMessageMonthLessCurrentMonthIfCurrentYear() {
         errorMonth.shouldBe(visible).shouldHave(text("Истёк срок действия карты"));
     }
 
-    public void findRequiredMonthErrorMessage() {
+    public void checkRequiredMonthErrorMessage() {
         errorMonth.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
     }
 
-    public void findYearErrorMessageMoreCurrentYear() {
+    public void checkYearErrorMessageMoreCurrentYear() {
         errorYear.shouldBe(visible).shouldHave(text("Неверно указан срок действия карты"));
     }
 
-    public void findYearErrorMessageLessCurrentYear() {
+    public void checkYearErrorMessageLessCurrentYear() {
         errorYear.shouldBe(visible).shouldHave(text("Истёк срок действия карты"));
     }
 
-    public void findRequiredYearErrorMessage() {
+    public void checkRequiredYearErrorMessage() {
         errorYear.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
     }
 
-    public void findHolderFormatErrorMessage() {
+    public void checkHolderFormatErrorMessage() {
         errorHolder.shouldBe(visible).shouldHave(text("Неверный формат"));
     }
 
-    public void findRequiredHolderErrorMessage() {
+    public void checkRequiredHolderErrorMessage() {
         errorHolder.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
     }
 
-    public void findCodeFormatErrorMessage() {
+    public void checkCodeFormatErrorMessage() {
         errorCode.shouldBe(visible).shouldHave(text("Неверный формат"));
     }
 
-    public void findRequiredCodeErrorMessage() {
+    public void checkRequiredCodeErrorMessage() {
         errorCode.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
     }
 

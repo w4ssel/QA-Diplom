@@ -5,6 +5,7 @@ import com.github.javafaker.Faker;
 import lombok.Value;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Random;
 
@@ -33,10 +34,10 @@ public class DataHelper {
         return "4444 4444 4444 444";
     }
 
-    private static LocalDate getCurrentDate = LocalDate.now();
+    private static LocalDate currentDate = LocalDate.now();
 
     public static int getCurrentMonth() {
-        return getCurrentDate.getMonthValue();
+        return currentDate.getMonthValue();
     }
 
     public static int getRandomValidMonthIfCurrentYear() {
@@ -49,22 +50,23 @@ public class DataHelper {
 
 
     public static int getCurrentYear() {
-        return getCurrentDate.getYear() % 100;
+        var currentYear = currentDate.format(DateTimeFormatter.ofPattern("yy"));
+       return Integer.parseInt(currentYear);
     }
 
     public static int getRandomValidYear() {
-        int maxYear = getCurrentYear() + 5;
+        var maxYear = getCurrentYear() + 5;
         return random.nextInt(maxYear - getCurrentYear() + 1) + getCurrentYear();
     }
 
     public static String getRandomInvalidYearLessCurrentYear() {
-        int randomYear = random.nextInt(getCurrentYear() - 1) + 1;
+        var randomYear = random.nextInt(getCurrentYear() - 1) + 1;
         return String.format("%02d", randomYear);
     }
 
     public static int getRandomInvalidYearMoreMaxYear() {
-        int maxYear = getCurrentYear() + 5;
-        return random.nextInt(100 - maxYear) + maxYear;
+        var maxYear = getCurrentYear() + 5;
+        return random.nextInt(100 - maxYear +1) + maxYear;
     }
 
 
@@ -73,7 +75,7 @@ public class DataHelper {
     }
 
     public static String getRandomValidHolderRu() {
-        Faker faker = new Faker(new Locale("ru"));
+        var faker = new Faker(new Locale("ru"));
         return faker.name().fullName();
     }
 
